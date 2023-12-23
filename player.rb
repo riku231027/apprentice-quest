@@ -46,7 +46,7 @@ end
 
 class Player < User
   def initialize #親クラスのinitializeを持ってくる
-    super ("あなた")
+    super("あなた")
   end
 
   def player_first_draw(draw) #プレイヤーが最初に引くカード
@@ -59,13 +59,13 @@ end
 
 class Dealer < User
   def initialize
-    super ("ディーラー")
-    @N = 1
+    super("ディーラー")
+    @n = 1
   end
 
   def dealer_first_draw(draw) #ディーラーが最初に引くカード
     first_draw(draw)
-    @N += 1
+    @n += 1
 
     puts "#{@name}の引いたカードは#{@hands[0].cards}でした。"
     puts "#{@name}の引いた2枚目のカードはわかりません。"
