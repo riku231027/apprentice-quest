@@ -1,17 +1,20 @@
-require_relative "deck"
-require_relative "player"
-
 class Card
-  attr_reader :card
+  attr_reader :mark, :number
 
-  def points(card)
-    case card[1]
+  def initialize(mark, number)
+    @mark = mark
+    @number = number
+  end
+
+  def cards
+    "#{@mark}の#{@number}"
+  end
+
+  def total
+    case @number
     when "A" then 11
     when "J", "Q", "K" then 10
-    else card[1].to_i
+    else @number.to_i
     end
   end
 end
-
-# cards = Card.new
-# puts cards.show
