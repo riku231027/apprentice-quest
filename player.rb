@@ -19,6 +19,11 @@ class User
     @total_score = 0
     @hands.each do |hand|
       @total_score += hand.total
+      @ace += 1 if hand.number == "A"
+    end
+    if @total_score > 21 #スコアが21以上なら@ace分スコアから10を引く
+      @ace.times { @total_score-= 10 }
+      @ace -= 1
     end
     return @total_score
   end
@@ -40,11 +45,11 @@ class User
 end
 
 class Player < User
-  def initialize
+  def initialize #親クラスのinitializeを持ってくる
     super ("あなた")
   end
 
-  def player_first_draw(draw)
+  def player_first_draw(draw) #プレイヤーが最初に引くカード
     first_draw(draw)
 
     puts "#{@name}の引いた1枚目のカードは#{@hands[0].cards}でした。"
@@ -58,7 +63,7 @@ class Dealer < User
     @N = 1
   end
 
-  def dealer_first_draw(draw)
+  def dealer_first_draw(draw) #ディーラーが最初に引くカード
     first_draw(draw)
     @N += 1
 
@@ -66,7 +71,7 @@ class Dealer < User
     puts "#{@name}の引いた2枚目のカードはわかりません。"
   end
 
-  def dealer_second_hand_show
+  def dealer_second_hand_show #ディーラーの二枚目のカードを開示する。
     puts "#{@name}の引いた2枚目のカードは#{@hands[1].cards}でした。"
     puts "#{@name}の現在の得点は#{total_score}です。"
   end
